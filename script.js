@@ -22,12 +22,18 @@ const button = document.createElement('button');
     });
     bodyElement.appendChild(button);
 
-function getRandomColor() {
+function incrementOpacity(div) {
+    let currentOpacity = div.getAttribute('data-opacity');
+    currentOpacity -= 0.1;
+    div.setAttribute('data-opacity', currentOpacity);
+    return getRandomColor(currentOpacity);
+};
+
+function getRandomColor(currentOpacity) {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
-    let alpha = 1.0;
-    return `rgb(${r}, ${g}, ${b}, ${alpha})`;
+    return `rgb(${r}, ${g}, ${b}, ${currentOpacity})`;
 }
 
 function createGrid(userGridInput) {
@@ -38,13 +44,10 @@ function createGrid(userGridInput) {
     
         for(let i = 0; i < userGridInput; i++){  
             const div = document.createElement('div');
-            div.classList.add(`grid${j}${i}`);
-            div.style.flex = '1';
-            div.style.margin = '0';
-            div.style.padding = '1';
-            div.style.backgroundColor = 'lightblue';
+            div.classList.add('grid');
+            div.setAttribute('data-opacity', 1.0);
             div.addEventListener('mouseover', () => {
-                div.style.backgroundColor = getRandomColor();
+                div.style.backgroundColor = incrementOpacity(div);
             });
             rowDiv.appendChild(div);
         }

@@ -23,12 +23,12 @@ body {
 }
 
 
-/* .grid {
+.grid {
     flex: 1;
     margin: 0;
     padding: 0;
     background-color: lightblue;
-} */
+}
 
 button {
     margin: 20px;
